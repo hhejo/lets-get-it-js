@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>끝말잇기</title>
+</head>
+<body>
+  <div><span id="order">1</span>번째 참가자</div>
+  <div>제시어: <span id="word"></span></div>
+  <input type="text">
+  <button>입력</button>
+  <!-- <button class="btn">버튼2</button>
+  <button class="btn">버튼3</button> -->
+  <script>
+    /*
+    const number = parseInt(prompt('몇 명이 참가하나요?'), 10);  // parseInt()
+    console.log(number);
+    alert(number);  // alert()
+    const yerOrNo = confirm('맞나요?'); // confirm()
+    console.log(yerOrNo);
+    */
+
+    /*
+    const $input = document.querySelector('input');  // 태그 1개
+    console.log($input);
+    const $$buttons = document.querySelectorAll('button');  // 태그 여러 개
+    console.log($$buttons);
+    */
+
+    /*
+    document.querySelector('#order');  // id
+    document.querySelectorAll('.btn');  // class
+    document.querySelector('div span');  // 자손 태그 전부
+    document.querySelector('div > span');  // 자식 태그만
+    */
+
+    /*
+    document.querySelector('input').addEventListener('input', function() {
+      console.log('글자 입력');
+    });
+    document.querySelector('button').addEventListener('click', (event) => {
+      console.log('버튼 클릭', event.target.value);
+    });
+    const onClick = function() {
+      console.log('버튼 클릭');
+    }
+    document.querySelector('button').addEventListener('click', onClick);
+    */
+
+    const number = Number(prompt('몇 명이 참가하나요?'));  // 참가자 수
+    const $button = document.querySelector('button');  // button
+    const $input = document.querySelector('input');  // input
+    const $word = document.querySelector('#word');  // word
+    const $order = document.querySelector('#order');  // order
+
+    let word;  // 제시어
+    let newWord;  // 새로 입력한 단어
+
+    const onClickButton = () => {
+      if (!word || word[word.length - 1] === newWord[0]) {
+        word = newWord;
+        $word.textContent = word;
+        const order = Number($order.textContent);
+        if (order + 1 > number) {
+          $order.textContent = 1;
+        } else {
+          $order.textContent = order + 1;
+        }
+      } else {
+        alert('올바르지 않은 단어입니다.');
+      }
+      $input.value = '';
+      $input.focus();
+    };
+
+    const onInput = (event) => {
+      newWord = event.target.value;
+    };
+
+    $button.addEventListener('click', onClickButton);
+    $input.addEventListener('input', onInput);
+  </script>
+</body>
+</html>
